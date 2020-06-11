@@ -1,0 +1,71 @@
+<html>
+
+<head>
+	<link href="style/style.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<title> skyscrapers.cc </title>
+</head>
+
+<body onclick="playMusic()">
+	<div id="center">
+
+		<span id="cock">04:20:00</span>
+		<div id="date">Monday July 15 2019</div>
+		<h1> skyscrapers </h1>
+	</div>
+		<div class="search-form">
+			<form action="https://www.google.com/search" class="searchform" method="get" name="searchform" target="_blank">
+			<input type="text" class="form-control search" name="q" placeholder="What you're looking for today, sir?" autocomplete="name">
+			<input type="submit" value="Off we go!">
+		</form>
+	</div>
+
+
+	<script type="text/javascript">
+		function cock() {
+			var d = new Date();
+			var hours = d.getHours();
+			var minutes = d.getMinutes();
+			var seconds = d.getSeconds();
+			if (hours <= 9) hours = "0" + hours;
+			if (minutes <= 9) minutes = "0" + minutes;
+			if (seconds <= 9) seconds = "0" + seconds;
+			date_time = hours + ":" + minutes + ":" + seconds;
+			if (document.layers) {
+				document.layers.doc_time.document.write(date_time);
+				document.layers.doc_time.document.close();
+			} else document.getElementById("cock").innerHTML = date_time;
+			setTimeout("cock()", 1000);
+		}
+		cock();
+		document.getElementById("date").innerHTML = formatAMPM();
+
+		function formatAMPM() {
+			var d = new Date(),
+				minutes = d.getMinutes().toString().length == 1 ? '0' + d.getMinutes() : d.getMinutes(),
+				hours = d.getHours().toString().length == 1 ? '0' + d.getHours() : d.getHours(),
+				ampm = d.getHours() >= 12 ? 'pm' : 'am',
+				months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+				days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+			return days[d.getDay()] + ' ' + months[d.getMonth()] + ' ' + d.getDate() + ' ' + d.getFullYear();
+		}
+
+
+		var playing = false;
+		function playMusic() {
+			var audio = new Audio('music/music.mp3');
+			if (playing == false) {
+				audio.play();
+				audio.volume = 0.02;
+				playing = true;
+			} else {
+				audio.pause();
+			}
+
+			audio.loop();
+
+		}
+	</script>
+</body>
+
+</html>
